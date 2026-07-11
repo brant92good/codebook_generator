@@ -1,3 +1,4 @@
+constexpr ll mxN=1e6+1;
 mobius[1]=1;
 forn(i,2,mxN){
 	if(!prime[i]) prime[i]=i,mobius[i]=-1,etf[i]=i-1,st[++sz]=i;
