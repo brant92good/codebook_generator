@@ -1,4 +1,5 @@
 //range add range query // sum query
+//初始化(1-indexed): a[i]放進 t[n-1+i] (i=1..n) 再呼叫無參數built(); 多測要清t/lz
 #define forr(a,b,c) for(ll a=b;a>=c;--a)
 #define forn(a,b,c) for(ll a=b;a<c;++a)
 constexpr ll mxN=2e5+1;

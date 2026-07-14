@@ -1,10 +1,9 @@
-// 注意: 空節點預設 Line(0,0), 查詢取max所以答案被鎖在>=0;
-// 答案可能為負的題要改 Line(){m=0,c=-inf;} (m=0所以cal不會溢位)
 // solve()是特定題: (y2-y1)/m 整數除法, 斜率不整除會錯, 通用時只抄struct+insert+query
 class Line{
 	public:
 		ll m,c;
-		Line(){m=c=0;}
+		Line(){m=0,c=-inf;} //通用版: 空節點=-inf (m=0, cal不會溢位)
+		//Line(){m=c=0;}   //原題版: 答案保證>=0才可用, 否則負答案會被鎖成0
 		Line(ll m,ll c):m(m),c(c){}
 		ll cal(ll x){return m*x+c;}
 };

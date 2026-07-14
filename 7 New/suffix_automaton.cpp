@@ -1,3 +1,4 @@
+// 靜態陣列約45MB(64MB限制小心); 多次呼叫sam()時sz要歸零(solve有做)
 constexpr ll mxN=1e5+1;
 class state{
     public:

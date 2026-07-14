@@ -1,3 +1,4 @@
+// scc編號從0開始(2-sat.cpp裡的版本是先++再給, 兩者編號差1, 混用注意)
 void dfs(ll u){
 	dfn[u]=low[u]=++tim,st[++id]=u,vs[u]=1;
 	for(auto &v:adj[u]){

@@ -1,3 +1,4 @@
+// 前置: res[]全設INF、起點寫死1(res[1]=0); lazy-deletion寫法
 void djk(){
 	mls<pll> hp;
 	res[1]=0,hp.emplace(pll{res[1],1});

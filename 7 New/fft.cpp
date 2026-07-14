@@ -1,3 +1,5 @@
+// 兩模數NTT+CRT: 結果係數必須 < 998244353*1004535809 (~1.0027e18), 否則需三模
+// sz上限2^21 (n+m+2 <= 2097152); solve()讀n+1,m+1個係數(n,m是次數)
 class FFT{
 	public:
 		ll mod,root,root_inv,maX,M,M_inv;

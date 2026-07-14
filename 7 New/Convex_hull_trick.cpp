@@ -1,5 +1,4 @@
 // 特定題解法: 斜率=(y2-y1)/m 是整數除法(負數向零截斷), 查詢x需單調遞增
-// check() 乘法沒用__int128, c差*m差 ~1e18 以上會溢位, 改編他題時注意
 class line{
 	public:
 		ll m,c;
@@ -13,8 +12,8 @@ class line{
 constexpr ll mxN=1e5+1;
 ll n,m,id=0,st[mxN];
 vc<line> ln;
-bool check(ll i,ll j,ll k){
-	return (ln[i].c-ln[k].c)*(ln[j].m-ln[i].m)<(ln[i].c-ln[j].c)*(ln[k].m-ln[i].m);
+bool check(ll i,ll j,ll k){ //__int128防溢位(c差*m差可到1e18以上)
+	return (__int128)(ln[i].c-ln[k].c)*(ln[j].m-ln[i].m)<(__int128)(ln[i].c-ln[j].c)*(ln[k].m-ln[i].m);
 }
 void solve(istream &cin){
 	cin >> n >> m;

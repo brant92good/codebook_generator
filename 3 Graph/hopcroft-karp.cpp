@@ -1,3 +1,4 @@
+// mxN=501 => n,m<=500; 匹配數0時不會輸出任何匹配行
 constexpr ll mxN=501;
 ll n,m,k,mat[mxN<<1]{},d[mxN<<1];
 vc<ll> adj[mxN];

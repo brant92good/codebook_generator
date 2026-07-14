@@ -1,3 +1,4 @@
+// 遞迴深度可達2m(=2e5), 注意stack限制
 constexpr ll mxN=2e5+1;
 ll sc=0,scc[mxN];
 ll id=0,st[mxN],vs[mxN]{};

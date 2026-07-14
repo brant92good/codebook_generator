@@ -1,5 +1,5 @@
-// !!! 已驗證此演算法是錯的: 「最大外接圓的三點在凸包上」的前提不成立,
-// !!! 隨機測資 2/3 輸出錯誤(誤差可達10倍)。正解基本上只能 O(n^3) 枚舉。勿抄!
+// 找三點使外接圓最大: O(n^3) 枚舉 (答案的三點通常「不在」凸包上, 不能旋轉卡殼)
+// 共線三點視為無效(回傳0); 全部共線輸出0. n~300內可跑
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -10,35 +10,14 @@ ll dist2(P a, P b) {
     ll dx = a.first - b.first, dy = a.second - b.second;
     return dx * dx + dy * dy;
 }
-double dist(P a, P b) { return sqrt(dist2(a, b)); }
+double dist(P a, P b) { return sqrt((double)dist2(a, b)); }
 
-// Andrew's Monotone Chain
-vector<P> convex_hull(vector<P> pts) {
-    sort(pts.begin(), pts.end());
-    int n = pts.size(), k = 0;
-    vector<P> hull(2 * n);
-    for (int i = 0; i < n; ++i) {
-        while (k >= 2 && cross({hull[k-1].first-hull[k-2].first, hull[k-1].second-hull[k-2].second},
-                               {pts[i].first-hull[k-1].first, pts[i].second-hull[k-1].second}) <= 0)
-            --k;
-        hull[k++] = pts[i];
-    }
-    for (int i = n-2, t = k; i >= 0; --i) {
-        while (k > t && cross({hull[k-1].first-hull[k-2].first, hull[k-1].second-hull[k-2].second},
-                              {pts[i].first-hull[k-1].first, pts[i].second-hull[k-1].second}) <= 0)
-            --k;
-        hull[k++] = pts[i];
-    }
-    hull.resize(k-1);
-    return hull;
-}
-
+// R = abc / (4S); 2S 用 ll cross 算避免浮點誤判共線
 double circumradius(P a, P b, P c) {
-    double A = dist(b, c), B = dist(a, c), C = dist(a, b);
-    double S = abs(cross({b.first-a.first, b.second-a.second},
-                         {c.first-a.first, c.second-a.second})) / 2.0;
-    if (S == 0) return 0; // 共線
-    return (A * B * C) / (4.0 * S);
+    ll S2 = abs(cross({b.first-a.first, b.second-a.second},
+                      {c.first-a.first, c.second-a.second})); // 2S
+    if (S2 == 0) return 0; // 共線
+    return dist(b,c) * dist(a,c) * dist(a,b) / (2.0 * (double)S2);
 }
 
 int main() {
@@ -46,23 +25,10 @@ int main() {
     cin >> n;
     vector<P> pts(n);
     for (int i = 0; i < n; ++i) cin >> pts[i].first >> pts[i].second;
-    vector<P> hull = convex_hull(pts);
-    int m = hull.size();
     double ans = 0;
-    // 旋轉卡殼
-    for (int i = 0; i < m; ++i) {
-        int j = (i + 1) % m, k = (j + 1) % m;
-        do {
-            while (true) {
-                int k2 = (k + 1) % m;
-                double r1 = circumradius(hull[i], hull[j], hull[k]);
-                double r2 = circumradius(hull[i], hull[j], hull[k2]);
-                if (r2 > r1) k = k2;
-                else break;
-            }
-            ans = max(ans, circumradius(hull[i], hull[j], hull[k]));
-            j = (j + 1) % m;
-        } while (j != i);
-    }
+    for (int i = 0; i < n; ++i)
+        for (int j = i + 1; j < n; ++j)
+            for (int k = j + 1; k < n; ++k)
+                ans = max(ans, circumradius(pts[i], pts[j], pts[k]));
     cout << fixed << setprecision(6) << ans << endl;
 }

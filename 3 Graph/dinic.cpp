@@ -1,4 +1,4 @@
-
+// 多測時 edg/adj/sz 是全域不會自動重置, 要自己清
 constexpr ll mxN=505;
 class fe{
 	public:

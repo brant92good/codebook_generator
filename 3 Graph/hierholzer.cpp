@@ -1,4 +1,4 @@
-//debrujin sequence
+//debrujin sequence 特化版(n<=15), 不是通用歐拉迴路模板, 一般題要整段改寫
 ll n;
 string s;
 vc<ll> adj[1<<14|1];

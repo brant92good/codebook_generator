@@ -1,9 +1,9 @@
-// 注意: 空節點預設 Line(0,-1) 是此題專用sentinel, 答案可能<-1的題要改-inf
 // solve()斜率 (y2-y1)/(x2-x1): 垂直線段(x1==x2)會除以零, 不整除會截斷
 class Line{
 	public:
 		ll m,c;
-		Line(){m=0,c=-1;}
+		Line(){m=0,c=-inf;} //通用版: 空節點=-inf
+		//Line(){m=0,c=-1;} //原題版sentinel: 該題「查無值輸出-1」時用這行
 		Line(ll m,ll c):m(m),c(c){}
 		ll cal(ll x){return m*x+c;}
 };

@@ -1,3 +1,4 @@
+// SPFA版MCMF: 邊權必須非負(無負環偵測, 原圖有負權會死迴圈); 源1匯n寫死; 多測清 e/id/adj
 class Edge{
 	public:
 		ll u,v,c,w;

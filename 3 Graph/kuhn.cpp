@@ -1,3 +1,4 @@
+// base=500寫死 => 隱含 n,m<=500 (女生編號=base+j), 換題記得改
 constexpr ll mxN=1001;
 constexpr ll base=500;
 ll n,m,k,vs1[mxN],vs2[mxN],ok[mxN][mxN]{};
