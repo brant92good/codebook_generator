@@ -3,6 +3,7 @@ ll sa[mxN],nsa[mxN],c[mxN],nc[mxN],cnt[mxN]{},lcp[mxN];
 void sfa(string s){
 	s+="$";
 	ll n=s.length();
+	memset(cnt,0,sizeof(cnt)); //cnt有殘留, 不清第二次呼叫必錯
 	forn(i,0,n) cnt[s[i]]++; forn(i,1,256) cnt[i]+=cnt[i-1];
 	forr(i,n-1,0) sa[--cnt[s[i]]]=i; c[sa[0]]=0; forn(i,1,n) c[sa[i]]=c[sa[i-1]]+(s[sa[i]]!=s[sa[i-1]]);
 	for(ll h=0;(1<<h)<n;h++){

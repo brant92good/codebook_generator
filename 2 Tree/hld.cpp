@@ -39,7 +39,6 @@ void solve(istream &cin){
 	adj[1].emp(0);
 	dfs();
 	hld();
-	terr;
 	forr(i,n-1,1) t[i]=max(t[i<<1],t[i<<1|1]);
 	for(ll op,a,b;q--;){
 		cin >> op >> a >> b;

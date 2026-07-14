@@ -1,4 +1,7 @@
 using ll=long long;
+// 注意: 兩模數CRT, 結果是真值 mod 998244353*1004535809 (~1.0028e18)
+// 真實係數必須 < 該值 (值域1e9且長度>~1000就會爆), 否則需三模數NTT
+// 長度上限 2^21 (n+m <= ~2e6): fft2 模數只有 2^21 階單位根, 超過會靜默出錯
  class FFT{
 	public:
 		ll mod,root,root_inv,maX,M,M_inv;

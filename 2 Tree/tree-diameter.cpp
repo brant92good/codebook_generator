@@ -1,4 +1,5 @@
-#define emp emplace_back()
+#define emp emplace_back
+constexpr ll mxN=2e5+1;
 ll n,res=0;
 vc<ll> adj[mxN],dp(mxN);
 

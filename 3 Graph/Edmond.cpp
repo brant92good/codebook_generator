@@ -18,7 +18,7 @@ ll bfs(){
 void solve(istream &cin){
 	cin>>n>>m;
 	pa.resize(n);
-	forn(i,1,m+1){ll u,v; cin>>u>>v,u--,v--; adj[u][v]=g[u][v]=1,adj[v][u]=g[v][u]=1;}
+	forn(i,1,m+1){ll u,v; cin>>u>>v,u--,v--; adj[u][v]++,g[u][v]++,adj[v][u]++,g[v][u]++;} //重邊容量/重數要累加
 	ll f=0;
 	fill(all(pa),-1),pa[0]=0;
 	for(ll nf;nf=bfs();f+=nf){
@@ -27,7 +27,7 @@ void solve(istream &cin){
 		fill(all(pa),-1),pa[0]=0;
 	}
 	vc<pll> res;
-	forn(i,0,n) forn(j,0,n) if(g[i][j] && pa[i]!=-1 && pa[j]==-1) res.emp(pll{i,j});
+	forn(i,0,n) forn(j,0,n) if(g[i][j] && pa[i]!=-1 && pa[j]==-1) forn(_,0,g[i][j]) res.emp(pll{i,j}); //重邊每條都要列
 	cout << res.size() << '\n';
 	for(auto&[u,v]:res) cout << u+1 << ' ' << v+1 << '\n';
 }

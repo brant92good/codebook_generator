@@ -37,7 +37,6 @@ void built(){
 			else nid[u]=y;
 		}
 	}
-	err(t.size());
 	dfs();
 	forn(j,1,mxB) forn(i,1,t.size()) pa[i][j]=pa[pa[i][j-1]][j-1];
 }

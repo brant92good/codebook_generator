@@ -1,3 +1,4 @@
+// 值需 < 2^31; 值域到1e18時 mxB 改 60、迴圈上限改 59
 constexpr ll mxN=2e5+1;
 constexpr ll mxB=31;
 ll n,a[mxN],b[mxB]{};

@@ -1,7 +1,7 @@
 constexpr ll mxB=21;
 ll a[1<<mxB]{};
 void fwt(ll *arr,ll type){
-	for(ll k=2;k<(1<<mxB);k<<=1){
+	for(ll k=2;k<=(1<<mxB);k<<=1){ //必須<=, 否則最高層蝶形沒做, 值>=2^(mxB-1)會錯
 		for(ll i=0,m=k>>1;i+m<(1<<mxB);i+=k){
 			forn(j,0,m){
 				ll x,y; x=arr[i+j],y=arr[i+j+m];

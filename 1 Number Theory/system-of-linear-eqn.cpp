@@ -1,3 +1,5 @@
+// mod mdl1 下高斯消去. 無解輸出-1; 無窮多解「不會偵測」(自由變數=0給特解), 題目要區分時要自己加
+// 輸入係數需已在 [0,mdl1) 內 (負數要先轉正); inv 其實是快速冪, 模數寫死 mdl1
 constexpr ll mxN=505;
 ll n,m;
 ll inv(ll a,ll m){ll ans; for(ans=1;m;ans=(m&1?(ans*a)%mdl1:ans),a=(a*a)%mdl1,m>>=1); return ans;}

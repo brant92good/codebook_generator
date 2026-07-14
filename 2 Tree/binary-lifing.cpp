@@ -7,7 +7,8 @@ void solve(istream &cin){
     forn(j,1,31) forn(i,1,n+1) p[i][j]=p[p[i][j-1]][j-1];
     while(q--){
         ll x,k; cin>>x>>k;
-        forn(i,0,30) if(k&(1<<i)) x=p[x][i];
+        k=min(k,(ll)mxN); // 跳超過深度必到0, clamp避免高位bit被忽略
+        forn(i,0,31) if(k>>i&1) x=p[x][i];
         cout << (x?x:-1) << '\n';
     }
 }

@@ -1,3 +1,4 @@
+// 注意: 每層遞迴持有deque, 鏈狀樹會爆棧且記憶體~300MB, 深樹題慎用
 constexpr ll mxN=2e5+1;
 ll n,k,res=0;
 vc<ll> adj[mxN];

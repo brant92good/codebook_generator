@@ -1,6 +1,8 @@
+// 節點數: build用2n-1, 每次單點改約log(n)+1個; mxT要 >= 2n+q*20 (n=q=2e5時約4.2e6)
+// 記憶體約 7e6*(8+4+4) ≈ 106MB; 多測時 t/lc/rc 殘留值會錯, 需清到 sz 為止
 constexpr ll mxN=2e5+1;
 constexpr ll mxT=7e6+1;
-ll n,q,t[mxT],a[mxN],lc[mxT],rc[mxT],rt[mxN],rsc,sz;
+ll n,q,t[mxT],a[mxN],rt[mxN<<1],rsc,sz; int lc[mxT],rc[mxT];
 void built(ll i,ll sl,ll sr){
 	if(sl==sr){t[i]=a[sl]; return;}
 	ll mid; mid=(sl+sr)>>1;
@@ -35,7 +37,7 @@ void solve(istream &cin){
 		if(op==3){
 			ll k; cin>>k;
 			rt[++rsc]=++sz;
-			lc[rt[rsc]]=lc[rt[k]],rc[rt[rsc]]=rc[rt[k]],t[rt[rsc]]=t[lc[rt[rsc]]]+t[rc[rt[rsc]]];
+			lc[rt[rsc]]=lc[rt[k]],rc[rt[rsc]]=rc[rt[k]],t[rt[rsc]]=t[rt[k]];
 		}
 		else if(op==1){
 			ll k,a,x; cin>>k>>a>>x;
