@@ -30,9 +30,14 @@
 \setminted{
     linenos,
     breaklines,
-    fontsize=\normalsize,
+    breakanywhere,
+    fontsize=\footnotesize,
     frame=lines
 }
+\setlength{\columnsep}{0.8em}
+\setlength{\columnseprule}{0.4pt}
+\begin{multicols}{2}
 \input{generated_content.tex}
+\end{multicols}
 
 \end{document}
