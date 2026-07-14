@@ -25,7 +25,7 @@ void solve(istream &cin){
 	mls<Point> hp;
 	d=euc(a[0],a[1]),hp.emplace(a[0]),hp.emplace(a[1]);
 	for(ll i=2,p=0;i<n;i++){
-		for(;p<n && (a[p].y-a[i].y)*(a[p].y-a[i].y)>=d;hp.erase(hp.lwb(a[p])),p++);
+		for(;p<i && (a[p].y-a[i].y)*(a[p].y-a[i].y)>=d;hp.erase(hp.lwb(a[p])),p++); //p<i! 寫p<n重複點(d=0)會清空set後erase(end())炸掉
 		auto it=hp.lwb(a[i]);
 		auto front=it,back=it;
 		forn(j,0,4){

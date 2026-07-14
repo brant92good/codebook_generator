@@ -1,3 +1,4 @@
+// 注意: 面積為0(退化/全共線)會除以零得NaN; 整數座標>~3e7時double精度風險(可改ll累加)
 struct Point {
     double x, y;
 };

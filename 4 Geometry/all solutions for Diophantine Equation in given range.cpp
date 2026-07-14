@@ -8,52 +8,65 @@
     2. Number of integer solutions (x, y) within bounds:
            minx <= x <= maxx
            miny <= y <= maxy
-       If lx and rx are the valid range for x:
-           Number of solutions = (rx - lx) / abs(b / g) + 1
+    需 a != 0 且 b != 0; |a|,|b|,|c|,範圍 ~1e9 內不溢位
 */
-void shift_solution(int & x, int & y, int a, int b, int cnt) {
+ll gcd_ext(ll a, ll b, ll &x, ll &y) {
+    if (!b) { x = 1, y = 0; return a; }
+    ll x1, y1, g = gcd_ext(b, a % b, x1, y1);
+    x = y1, y = x1 - (a / b) * y1;
+    return g;
+}
+bool find_any_solution(ll a, ll b, ll c, ll &x0, ll &y0, ll &g) {
+    g = gcd_ext(abs(a), abs(b), x0, y0);
+    if (c % g) return false;
+    x0 *= c / g, y0 *= c / g;
+    if (a < 0) x0 = -x0;
+    if (b < 0) y0 = -y0;
+    return true;
+}
+void shift_solution(ll &x, ll &y, ll a, ll b, ll cnt) {
     x += cnt * b;
     y -= cnt * a;
 }
 
-int find_all_solutions(int a, int b, int c, int minx, int maxx, int miny, int maxy) {
-    int x, y, g;
+ll find_all_solutions(ll a, ll b, ll c, ll minx, ll maxx, ll miny, ll maxy) {
+    ll x, y, g;
     if (!find_any_solution(a, b, c, x, y, g))
         return 0;
     a /= g;
     b /= g;
 
-    int sign_a = a > 0 ? +1 : -1;
-    int sign_b = b > 0 ? +1 : -1;
+    ll sign_a = a > 0 ? +1 : -1;
+    ll sign_b = b > 0 ? +1 : -1;
 
     shift_solution(x, y, a, b, (minx - x) / b);
     if (x < minx)
         shift_solution(x, y, a, b, sign_b);
     if (x > maxx)
         return 0;
-    int lx1 = x;
+    ll lx1 = x;
 
     shift_solution(x, y, a, b, (maxx - x) / b);
     if (x > maxx)
         shift_solution(x, y, a, b, -sign_b);
-    int rx1 = x;
+    ll rx1 = x;
 
     shift_solution(x, y, a, b, -(miny - y) / a);
     if (y < miny)
         shift_solution(x, y, a, b, -sign_a);
     if (y > maxy)
         return 0;
-    int lx2 = x;
+    ll lx2 = x;
 
     shift_solution(x, y, a, b, -(maxy - y) / a);
     if (y > maxy)
         shift_solution(x, y, a, b, sign_a);
-    int rx2 = x;
+    ll rx2 = x;
 
     if (lx2 > rx2)
         swap(lx2, rx2);
-    int lx = max(lx1, lx2);
-    int rx = min(rx1, rx2);
+    ll lx = max(lx1, lx2);
+    ll rx = min(rx1, rx2);
 
     if (lx > rx)
         return 0;

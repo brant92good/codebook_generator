@@ -1,3 +1,5 @@
+// 注意: 重複點會全部留在輸出裡, 用前先 sort+unique 去重
+// 共線邊上的點會保留(非嚴格凸包); |座標|<=1e9 時 cross 不溢位
 class Point{
 	public:
 		ll x,y;

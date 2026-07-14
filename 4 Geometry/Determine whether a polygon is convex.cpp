@@ -1,3 +1,5 @@
+// 注意: 自交但每個轉向同號的多邊形(如五角星一筆畫)會被誤判convex,
+// 嚴格判定需另檢查總轉角恰為±360度; 整數座標>~3e7時double cross有精度風險, 應改ll
 #include <vector>
 using namespace std;
 

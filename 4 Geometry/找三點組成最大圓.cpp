@@ -1,3 +1,5 @@
+// !!! 已驗證此演算法是錯的: 「最大外接圓的三點在凸包上」的前提不成立,
+// !!! 隨機測資 2/3 輸出錯誤(誤差可達10倍)。正解基本上只能 O(n^3) 枚舉。勿抄!
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;

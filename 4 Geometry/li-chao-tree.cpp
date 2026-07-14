@@ -1,3 +1,6 @@
+// 注意: 空節點預設 Line(0,0), 查詢取max所以答案被鎖在>=0;
+// 答案可能為負的題要改 Line(){m=0,c=-inf;} (m=0所以cal不會溢位)
+// solve()是特定題: (y2-y1)/m 整數除法, 斜率不整除會錯, 通用時只抄struct+insert+query
 class Line{
 	public:
 		ll m,c;

@@ -1,3 +1,5 @@
+// 注意: 空節點預設 Line(0,-1) 是此題專用sentinel, 答案可能<-1的題要改-inf
+// solve()斜率 (y2-y1)/(x2-x1): 垂直線段(x1==x2)會除以零, 不整除會截斷
 class Line{
 	public:
 		ll m,c;

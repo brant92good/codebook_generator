@@ -1,15 +1,21 @@
 struct Point {
-    int x, y;
+    long long x, y;
 };
 
-// 以 base 為基準點，對 points 進行極角排序
+// 以 base 為原點極角排序: 從+x軸(角度0)逆時針到2π; 同角度距離近的在前
+// 必須先分上下半平面再比cross, 否則超過180度時comparator無效(UB)
+// base 本身若在點集中會被排在最前(視為角度0距離0)
 void polarSort(vector<Point>& points, Point base) {
+    auto half = [&](const Point& p) { // 0:上半平面(含+x軸), 1:下半平面(含-x軸)
+        long long dx = p.x - base.x, dy = p.y - base.y;
+        return (dy < 0 || (dy == 0 && dx < 0)) ? 1 : 0;
+    };
     sort(points.begin(), points.end(), [&](const Point& a, const Point& b) {
-        int dx1 = a.x - base.x, dy1 = a.y - base.y;
-        int dx2 = b.x - base.x, dy2 = b.y - base.y;
-        long long cross = 1LL * dx1 * dy2 - 1LL * dy1 * dx2;
-        if (cross != 0) return cross > 0;
-        // 極角相同時，距離近的排前面
-        return dx1 * dx1 + dy1 * dy1 < dx2 * dx2 + dy2 * dy2;
+        if (half(a) != half(b)) return half(a) < half(b);
+        long long ax = a.x - base.x, ay = a.y - base.y;
+        long long bx = b.x - base.x, by = b.y - base.y;
+        long long cr = ax * by - ay * bx;
+        if (cr != 0) return cr > 0;
+        return ax * ax + ay * ay < bx * bx + by * by; // 座標<=1e9不溢位
     });
 }
