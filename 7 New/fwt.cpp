@@ -1,8 +1,8 @@
 constexpr ll mxB=21;
 ll a[1<<mxB]{};
 void fwt(ll *arr,ll type){
-	for(ll k=2;k<=(1<<mxB);k<<=1){ //必須<=, 否則最高層蝶形沒做, 值>=2^(mxB-1)會錯
-		for(ll i=0,m=k>>1;i+m<(1<<mxB);i+=k){
+	for(ll m=1;m<(1<<mxB);m<<=1){ //m=半塊距離, 跑滿 1..2^(mxB-1) 共mxB層
+		for(ll i=0,k=m<<1;i+m<(1<<mxB);i+=k){
 			forn(j,0,m){
 				ll x,y; x=arr[i+j],y=arr[i+j+m];
 				arr[i+j]=x+y,arr[i+j+m]=x-y;
